@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekend Getaways from Bangalore</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100">
+<header class="bg-gradient-to-r from-emerald-700 to-teal-500 text-white p-10">
+  <h1 class="text-4xl font-bold">🏔 Weekend Getaways from Bangalore</h1>
+  <p class="mt-2">Tourist places from your Google Maps list</p>
+  <input id="search" class="mt-6 w-full max-w-md p-3 rounded text-black" placeholder="Search destinations...">
+</header>
+
+<div id="cards" class="max-w-7xl mx-auto p-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+<script>
+const places=[
+{name:"Panchapalli Dam",rating:"4.2",reviews:"1,217",distance:"150 km",desc:"Scenic reservoir ideal for sunrise and road trips."},
+{name:"Rocky Ridge Cafe",rating:"4.7",reviews:"530",distance:"70 km",desc:"Popular café stop for bikers and families."},
+{name:"Mandaragiri Hill",rating:"4.6",reviews:"4,470",distance:"75 km",desc:"Hilltop temple with panoramic views."},
+{name:"Bettahalli Kaval",rating:"-",reviews:"-",distance:"60 km",desc:"Quiet countryside viewpoint."},
+{name:"Vannama Lake",rating:"4.7",reviews:"283",distance:"140 km",desc:"Beautiful lake for sunset photography."},
+{name:"Manchanabele Dam Top Viewpoint",rating:"4.3",reviews:"2,501",distance:"40 km",desc:"Popular weekend picnic destination."},
+{name:"Gundamagere Lake",rating:"4.4",reviews:"253",distance:"35 km",desc:"Peaceful lake near Bangalore."},
+{name:"Vainu Bappu Observatory",rating:"4.4",reviews:"617",distance:"210 km",desc:"India's famous astronomical observatory."},
+{name:"Javadhu Hills",rating:"4.3",reviews:"259",distance:"250 km",desc:"Lush hill range with pleasant weather."},
+{name:"Biligundla Fishing & Boating Spot",rating:"4.3",reviews:"437",distance:"135 km",desc:"Fishing and boating on the Cauvery."},
+{name:"Bolumalai Fort",rating:"4.6",reviews:"766",distance:"120 km",desc:"Historic fort with scenic trekking."},
+{name:"Penukonda",rating:"-",reviews:"-",distance:"160 km",desc:"Historic town with forts and temples."},
+{name:"Mallappakonda Hills Viewpoint",rating:"4.7",reviews:"212",distance:"180 km",desc:"Excellent viewpoint for sunrise."}
+];
+const container=document.getElementById('cards');
+function render(filter=""){
+ container.innerHTML="";
+ places.filter(p=>p.name.toLowerCase().includes(filter.toLowerCase())).forEach(p=>{
+  container.innerHTML+=`
+<div class="bg-white rounded-xl shadow hover:shadow-xl transition overflow-hidden">
+<img src="https://placehold.co/600x350?text=${encodeURIComponent(p.name)}" class="w-full h-48 object-cover">
+<div class="p-5">
+<h2 class="text-xl font-bold">${p.name}</h2>
+<p class="text-yellow-600 mt-2">⭐ ${p.rating} (${p.reviews} reviews)</p>
+<p class="text-slate-600 mt-1">📍 ${p.distance} from Bangalore</p>
+<p class="mt-3 text-slate-700">${p.desc}</p>
+<a target="_blank" href="https://www.google.com/search?q=${encodeURIComponent(p.name)}" class="inline-block mt-4 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700">View Details</a>
+</div></div>`;
+ });
+}
+render();
+document.getElementById('search').addEventListener('input',e=>render(e.target.value));
+</script>
+</body>
+</html>
